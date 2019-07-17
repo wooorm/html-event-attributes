@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - lts/dubnium
+  - node
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: qtg1aiVAgC74CrKhxkgrPC1Gf19Ybp3NtcfCAbAm0GZrW2qOsBev7wvZ9qC+rBmbhjh3NiNquMH2JgMi3aJeMVhZsqyLNYnnFexafoyHsHxgtEOgofzc+oGPVLx+c9aMKk1Vor6ThomQ9fPXDMwRXkzjn97r59RKe+UiqmzX22/1kvqPiyeeQQwaR4zVhAHo/HRUyQQ+7KbR3qT+tHzSTKBjI63S/XQcsRMlr7ZJDReU9yoxujpu6hgiYOD3eB/8yn+AxiV5+s8Y4k7lEaYUKI8VE/LPtti6gV0lsfxQeznwHAYobwHi2Ioy8UrdcQ1SEE9il7Nyvu6a3xL9Yi5O7mG7NXXrxMHQ68dwnpv2C6Uk2RI6s6C8jskd0RmvAxqJJkBmG/jRixI8xEVyAHKytN1vpIVL5wgVk6YlW8nZjNcria6qU6/y5gKbA/n/N2PCCvyPiX+nFDwMKnS5fDkR1dhN2HLVOoOmbTshGLHAb/RE+WbIkw2BpHacPIOcz8RtXoOBXdJyJVd4OoIKjzOzPaSPJnE4LoWhVK+GcsaJg2ZW7avFskcM2nbw0Y07WAp5WUsUH+lZuAiGXSZJDOj7ZExPhY/aLXq/NK93kml8W40xQt9/dsOww4n+RWYiH69XZT5QpZ3Mo6bqKgvY9uriHxpkq4rbA9swW0VcmeLsTa0=
+  file:
+    - 'html-event-attributes.js'
+    - 'html-event-attributes.min.js'
+  on:
+    tags: true

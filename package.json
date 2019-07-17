@@ -1,0 +1,74 @@
+{
+  "name": "html-event-attributes",
+  "version": "0.0.0",
+  "description": "List of HTML event handler content attributes",
+  "license": "MIT",
+  "keywords": [
+    "html",
+    "event",
+    "handler",
+    "tag",
+    "name",
+    "attribute",
+    "property",
+    "w3c",
+    "whatwg"
+  ],
+  "repository": "wooorm/html-event-attributes",
+  "bugs": "https://github.com/wooorm/html-event-attributes/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
+  "main": "index.json",
+  "files": [
+    "index.json"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "alpha-sort": "^3.0.0",
+    "bail": "^1.0.0",
+    "browserify": "^16.0.0",
+    "concat-stream": "^2.0.0",
+    "hast-util-is-event-handler": "^1.0.0",
+    "hast-util-select": "^3.0.0",
+    "hast-util-to-string": "^1.0.0",
+    "prettier": "^1.0.0",
+    "rehype-parse": "^6.0.0",
+    "remark-cli": "^6.0.0",
+    "remark-preset-wooorm": "^5.0.0",
+    "tape": "^4.4.0",
+    "tinyify": "^2.0.0",
+    "unified": "^8.0.0",
+    "xo": "^0.24.0"
+  },
+  "scripts": {
+    "generate": "node build",
+    "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix",
+    "build-bundle": "browserify index.json -s htmlEventAttributes -o html-event-attributes.js",
+    "build-mangle": "browserify index.json -s htmlEventAttributes -p tinyify -o html-event-attributes.min.js",
+    "build": "npm run build-bundle && npm run build-mangle",
+    "test-api": "node test",
+    "test": "npm run format && npm run build && npm run test-api"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
+  "xo": {
+    "prettier": true,
+    "esnext": false,
+    "ignores": [
+      "html-event-attributes.js"
+    ]
+  },
+  "remarkConfig": {
+    "plugins": [
+      "preset-wooorm"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+node_modules/
+html-event-attributes.js
+html-event-attributes.min.js
+yarn.lock

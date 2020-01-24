@@ -70,6 +70,7 @@
   "onseeked",
   "onseeking",
   "onselect",
+  "onslotchange",
   "onstalled",
   "onstorage",
   "onsubmit",

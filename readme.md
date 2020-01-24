@@ -6,7 +6,7 @@
 
 List of HTML event handler content attributes.
 
-Includes events from [HTML 4][html4] and [HTML][html] (the living standard).
+Includes events from [HTML 4][html4] and [HTML][] (the living standard).
 
 ## Install
 

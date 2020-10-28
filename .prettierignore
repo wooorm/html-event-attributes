@@ -1,2 +1,4 @@
 html-event-attributes.js
 html-event-attributes.min.js
+*.json
+*.md

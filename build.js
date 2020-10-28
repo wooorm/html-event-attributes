@@ -20,8 +20,8 @@ var expected = 2
 https.get('https://www.w3.org/TR/html4/index/attributes.html', onhtml4)
 https.get('https://html.spec.whatwg.org/multipage/indices.html', onhtml)
 
-function onhtml4(res) {
-  res.pipe(concat(onconcat)).on('error', bail)
+function onhtml4(response) {
+  response.pipe(concat(onconcat)).on('error', bail)
 
   function onconcat(buf) {
     var nodes = q.selectAll('table tr', processor.parse(buf))
@@ -51,8 +51,8 @@ function onhtml4(res) {
   }
 }
 
-function onhtml(res) {
-  res.pipe(concat(onconcat)).on('error', bail)
+function onhtml(response) {
+  response.pipe(concat(onconcat)).on('error', bail)
 
   function onconcat(buf) {
     var nodes = q.selectAll('#ix-event-handlers tbody tr', processor.parse(buf))

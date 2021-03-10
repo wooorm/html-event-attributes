@@ -25,29 +25,25 @@ function onhtml4(response) {
 
   function onconcat(buf) {
     var nodes = q.selectAll('table tr', processor.parse(buf))
+    var index = -1
+    var name
+
+    while (++index < nodes.length) {
+      name = q.select('[title="Name"]', nodes[index])
+
+      if (name) {
+        name = toString(name).trim()
+
+        if (ev(name)) all.push(name)
+      }
+    }
 
     // Throw if we didn’t match, e.g., when the spec updates.
-    if (nodes.length === 0) {
+    if (!index) {
       throw new Error('Missing results in html4')
     }
 
-    nodes.forEach(each)
-
     done()
-  }
-
-  function each(node) {
-    var name = q.select('[title="Name"]', node)
-
-    if (!name) {
-      return
-    }
-
-    name = toString(name).trim()
-
-    if (ev(name)) {
-      all.push(name)
-    }
   }
 }
 
@@ -56,23 +52,20 @@ function onhtml(response) {
 
   function onconcat(buf) {
     var nodes = q.selectAll('#ix-event-handlers tbody tr', processor.parse(buf))
+    var index = -1
+    var name
+
+    while (++index < nodes.length) {
+      name = toString(nodes[index].children[0]).trim()
+      if (ev(name)) all.push(name)
+    }
 
     // Throw if we didn’t match, e.g., when the spec updates.
-    if (nodes.length === 0) {
+    if (!index) {
       throw new Error('Missing results in html')
     }
 
-    nodes.forEach(each)
-
     done()
-  }
-
-  function each(node) {
-    var name = toString(node.children[0]).trim()
-
-    if (ev(name)) {
-      all.push(name)
-    }
   }
 }
 
@@ -82,12 +75,12 @@ function done() {
   if (actual === expected) {
     fs.writeFile(
       'index.json',
-      JSON.stringify(all.filter(unique).sort(alphaSort.ascending), 0, 2) + '\n',
+      JSON.stringify(
+        all.filter((d, i, data) => data.indexOf(d) === i).sort(alphaSort()),
+        null,
+        2
+      ) + '\n',
       bail
     )
   }
-}
-
-function unique(d, i, data) {
-  return data.indexOf(d) === i
 }

@@ -1,16 +1,14 @@
-'use strict'
-
-var fs = require('fs')
-var https = require('https')
-var concat = require('concat-stream')
-var bail = require('bail')
-var alphaSort = require('alpha-sort')
-var unified = require('unified')
-var html = require('rehype-parse')
-var q = require('hast-util-select')
-var toString = require('hast-util-to-string')
-var ev = require('hast-util-is-event-handler')
-var all = require('.')
+import fs from 'fs'
+import https from 'https'
+import concat from 'concat-stream'
+import bail from 'bail'
+import alphaSort from 'alpha-sort'
+import unified from 'unified'
+import html from 'rehype-parse'
+import q from 'hast-util-select'
+import toString from 'hast-util-to-string'
+import ev from 'hast-util-is-event-handler'
+import {htmlEventAttributes} from './index.js'
 
 var processor = unified().use(html)
 
@@ -34,7 +32,7 @@ function onhtml4(response) {
       if (name) {
         name = toString(name).trim()
 
-        if (ev(name)) all.push(name)
+        if (ev(name)) htmlEventAttributes.push(name)
       }
     }
 
@@ -57,7 +55,7 @@ function onhtml(response) {
 
     while (++index < nodes.length) {
       name = toString(nodes[index].children[0]).trim()
-      if (ev(name)) all.push(name)
+      if (ev(name)) htmlEventAttributes.push(name)
     }
 
     // Throw if we didn’t match, e.g., when the spec updates.
@@ -70,16 +68,18 @@ function onhtml(response) {
 }
 
 function done() {
-  actual++
-
-  if (actual === expected) {
+  if (++actual === expected) {
     fs.writeFile(
-      'index.json',
-      JSON.stringify(
-        all.filter((d, i, data) => data.indexOf(d) === i).sort(alphaSort()),
-        null,
-        2
-      ) + '\n',
+      'index.js',
+      'export var htmlEventAttributes = ' +
+        JSON.stringify(
+          htmlEventAttributes
+            .filter((d, i, data) => data.indexOf(d) === i)
+            .sort(alphaSort()),
+          null,
+          2
+        ) +
+        '\n',
       bail
     )
   }

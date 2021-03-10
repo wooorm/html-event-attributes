@@ -11,6 +11,9 @@ Includes events from [HTML 4][html4] and [HTML][] (the living standard).
 
 ## Install
 
+This package is ESM only: Node 12+ is needed to use it and it must be `import`ed
+instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -20,7 +23,7 @@ npm install html-event-attributes
 ## Use
 
 ```js
-var htmlEventAttributes = require('html-event-attributes')
+import {htmlEventAttributes} from 'html-event-attributes'
 
 console.log(htmlEventAttributes.slice(0, 10))
 ```
@@ -44,9 +47,12 @@ Yields:
 
 ## API
 
+This package exports the following identifiers: `htmlEventAttributes`.
+There is no default export.
+
 ### `htmlEventAttributes`
 
-`Array.<string>` — List of HTML event handler content attributes.
+`string[]` — List of HTML event handler content attributes.
 
 ## License
 

@@ -1,8 +1,6 @@
-'use strict'
-
-var assert = require('assert')
-var test = require('tape')
-var htmlEventAttributes = require('.')
+import assert from 'assert'
+import test from 'tape'
+import {htmlEventAttributes} from './index.js'
 
 test('htmlEventAttributes', function (t) {
   t.ok(Array.isArray(htmlEventAttributes), 'should be an array')

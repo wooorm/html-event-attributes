@@ -10,7 +10,7 @@ test('htmlEventAttributes', function (t) {
     var prop
     while (++index < htmlEventAttributes.length) {
       prop = htmlEventAttributes[index]
-      assert.ok(typeof prop, 'string', prop + ' should be string')
+      assert.equal(typeof prop, 'string', prop + ' should be string')
       assert.strictEqual(prop, prop.trim(), prop + ' should be trimmed')
       assert.ok(/^on[a-z]+$/.test(prop), prop + ' should be `a-z`')
     }

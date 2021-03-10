@@ -1,6 +1,7 @@
 # html-event-attributes
 
 [![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
@@ -53,9 +54,13 @@ Yields:
 
 <!-- Definition -->
 
-[build-badge]: https://img.shields.io/travis/wooorm/html-event-attributes.svg
+[build-badge]: https://github.com/wooorm/html-event-attributes/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/wooorm/html-event-attributes
+[build]: https://github.com/wooorm/html-event-attributes/actions
+
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/html-event-attributes.svg
+
+[coverage]: https://codecov.io/github/wooorm/html-event-attributes
 
 [downloads-badge]: https://img.shields.io/npm/dm/html-event-attributes.svg
 

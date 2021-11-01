@@ -1,3 +1,8 @@
+/**
+ * List of HTML event handler attributes.
+ *
+ * @type {Array<string>}
+ */
 export const htmlEventAttributes = [
   'onabort',
   'onafterprint',

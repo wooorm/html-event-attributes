@@ -73,15 +73,22 @@ function done() {
   if (++actual === expected) {
     fs.writeFile(
       'index.js',
-      'export const htmlEventAttributes = ' +
-        JSON.stringify(
-          htmlEventAttributes
-            .filter((d, i, data) => data.indexOf(d) === i)
-            .sort(alphaSort()),
-          null,
-          2
-        ) +
-        '\n',
+      [
+        '/**',
+        ' * List of HTML event handler attributes.',
+        ' *',
+        ' * @type {Array<string>}',
+        ' */',
+        'export const htmlEventAttributes = ' +
+          JSON.stringify(
+            htmlEventAttributes
+              .filter((d, i, data) => data.indexOf(d) === i)
+              .sort(alphaSort()),
+            null,
+            2
+          ),
+        ''
+      ].join('\n'),
       bail
     )
   }

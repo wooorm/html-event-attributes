@@ -105,6 +105,8 @@ This package is safe.
 
 ## Related
 
+*   [`wooorm/svg-event-attributes`](https://github.com/wooorm/svg-event-attributes)
+    — list of SVG event attributes
 *   [`wooorm/html-element-attributes`](https://github.com/wooorm/html-element-attributes)
     — map of HTML elements to attributes
 *   [`wooorm/svg-element-attributes`](https://github.com/wooorm/svg-element-attributes)

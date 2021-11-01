@@ -1,4 +1,4 @@
-import assert from 'assert'
+import assert from 'node:assert'
 import test from 'tape'
 import {htmlEventAttributes} from './index.js'
 
@@ -6,8 +6,8 @@ test('htmlEventAttributes', function (t) {
   t.ok(Array.isArray(htmlEventAttributes), 'should be an array')
 
   t.doesNotThrow(function () {
-    var index = -1
-    var prop
+    let index = -1
+    let prop
     while (++index < htmlEventAttributes.length) {
       prop = htmlEventAttributes[index]
       assert.equal(typeof prop, 'string', prop + ' should be string')

@@ -1,4 +1,4 @@
-export var htmlEventAttributes = [
+export const htmlEventAttributes = [
   'onabort',
   'onafterprint',
   'onauxclick',

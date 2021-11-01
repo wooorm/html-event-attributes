@@ -15,57 +15,59 @@ const processor = unified().use(html)
 let actual = 0
 const expected = 2
 
-https.get('https://www.w3.org/TR/html4/index/attributes.html', onhtml4)
-https.get('https://html.spec.whatwg.org/multipage/indices.html', onhtml)
+https.get('https://www.w3.org/TR/html4/index/attributes.html', (response) => {
+  response
+    .pipe(
+      concat((buf) => {
+        const nodes = selectAll('table tr', processor.parse(buf))
+        let index = -1
 
-function onhtml4(response) {
-  response.pipe(concat(onconcat)).on('error', bail)
+        while (++index < nodes.length) {
+          const node = select('[title="Name"]', nodes[index])
 
-  function onconcat(buf) {
-    const nodes = selectAll('table tr', processor.parse(buf))
-    let index = -1
-    let name
+          if (node) {
+            const name = toString(node).trim()
 
-    while (++index < nodes.length) {
-      name = select('[title="Name"]', nodes[index])
+            if (isEventHandler(name)) htmlEventAttributes.push(name)
+          }
+        }
 
-      if (name) {
-        name = toString(name).trim()
+        // Throw if we didn’t match, e.g., when the spec updates.
+        if (!index) {
+          throw new Error('Missing results in html4')
+        }
 
-        if (isEventHandler(name)) htmlEventAttributes.push(name)
-      }
-    }
+        done()
+      })
+    )
+    .on('error', bail)
+})
 
-    // Throw if we didn’t match, e.g., when the spec updates.
-    if (!index) {
-      throw new Error('Missing results in html4')
-    }
+https.get('https://html.spec.whatwg.org/multipage/indices.html', (response) => {
+  response
+    .pipe(
+      concat((buf) => {
+        const nodes = selectAll(
+          '#ix-event-handlers tbody tr',
+          processor.parse(buf)
+        )
+        let index = -1
 
-    done()
-  }
-}
+        while (++index < nodes.length) {
+          const name = toString(nodes[index].children[0]).trim()
+          if (isEventHandler(name)) htmlEventAttributes.push(name)
+        }
 
-function onhtml(response) {
-  response.pipe(concat(onconcat)).on('error', bail)
+        // Throw if we didn’t match, e.g., when the spec updates.
+        if (!index) {
+          throw new Error('Missing results in html')
+        }
 
-  function onconcat(buf) {
-    const nodes = selectAll('#ix-event-handlers tbody tr', processor.parse(buf))
-    let index = -1
-    let name
-
-    while (++index < nodes.length) {
-      name = toString(nodes[index].children[0]).trim()
-      if (isEventHandler(name)) htmlEventAttributes.push(name)
-    }
-
-    // Throw if we didn’t match, e.g., when the spec updates.
-    if (!index) {
-      throw new Error('Missing results in html')
-    }
-
-    done()
-  }
-}
+        done()
+      })
+    )
+    .on('error', bail)
+})
 
 function done() {
   if (++actual === expected) {

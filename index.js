@@ -9,6 +9,7 @@ export const htmlEventAttributes = [
   'onauxclick',
   'onbeforematch',
   'onbeforeprint',
+  'onbeforetoggle',
   'onbeforeunload',
   'onblur',
   'oncancel',
